@@ -4,4 +4,6 @@ members = [
 "frontend",
 ]
 
-default-members = ["frontend"]
+default-members = ["frontend", "backend"]
+
+resolver = "2"

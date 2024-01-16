@@ -1,7 +1,6 @@
 pub mod names;
 
-use crate::names::RandomFirstname;
-use crate::names::RandomSurname;
+use crate::names::RandonAnimalGenerator;
 pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
