@@ -1,22 +1,22 @@
-use names::{AnimalName, RandomNameGenerator};
+use names::{animal::AnimalName, animal::RandomAnimalGenerator, common::RandomNameGenerator};
 
 
 pub mod names;
 
+//TODO: Expand with type of names to create
+// Animal
+// Norse
+// Norwegian bokmål
+// Norwegian Nynorsk
 
 
 pub struct Generator{
-    animal_generator: names::RandonAnimalGenerator
 
 }
 
 impl Generator {
-    pub fn new() -> Self {
-        Self {
-            animal_generator : names::RandonAnimalGenerator{}
-        }
-    }
-    pub fn generate(&self) -> AnimalName {
-        return self.animal_generator.create_rand_name();
+
+    pub fn generate() -> AnimalName {
+        return RandomAnimalGenerator::create_rand_name();
     } 
 }

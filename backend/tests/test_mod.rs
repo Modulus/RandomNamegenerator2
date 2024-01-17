@@ -1,18 +1,12 @@
 extern crate backend;
 
-use backend::names::RandonAnimalGenerator;
-use backend::names::RandomNameGenerator;
-// use crate::names::read_random_line_in_file;
-        // Returns a string from a random line in a file
-    
-    // Returns a string from a random line in a file
-
+use backend::names::animal::RandomAnimalGenerator;
+use backend::names::common::RandomNameGenerator;
 
 
 #[test]
 fn test_create_random_animal_gives_name(){
-    let random_firstname_generator = RandonAnimalGenerator{};
-    let compound = random_firstname_generator.create_rand_name();
+    let compound = RandomAnimalGenerator::create_rand_name();
 
     assert!(compound.animal.len() > 1);
     assert!(compound.adjective.len() > 1);
