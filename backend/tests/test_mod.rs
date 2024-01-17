@@ -2,11 +2,6 @@ extern crate backend;
 
 use backend::names::RandonAnimalGenerator;
 use backend::names::RandomNameGenerator;
-use std::env;
-
-use std::fs;
-use std::path::Path;
-use std::path::PathBuf;
 // use crate::names::read_random_line_in_file;
         // Returns a string from a random line in a file
     

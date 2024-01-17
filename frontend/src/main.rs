@@ -7,5 +7,4 @@ fn main() {
     let name = generator.generate();
     println!("Generating name!");
     println!("{:?}", name);
-    println!("Hello, world!");
 }
