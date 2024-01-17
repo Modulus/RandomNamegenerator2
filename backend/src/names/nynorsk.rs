@@ -35,7 +35,7 @@ impl RandomNynorskGenerator {
         let first = common::return_random_element(first_parts).unwrap();
         let last = common::return_random_element(last_parts).unwrap();
 
-        let compunded = format!("{} {}", first, last);
+        let compunded = format!("{}{}", first, last);
 
         return compunded;
     }
