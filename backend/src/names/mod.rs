@@ -6,39 +6,24 @@ pub fn create_random(min: usize, max: usize) -> usize {
 }
 
 
-fn return_random_element(words: Vec<&str>) -> String {
+fn return_random_element(words: Vec<&str>) -> Option<String> {
     if words.len() <= 0 {
-        return String::from("");
+        return None;
     }
 
-    let rand = create_random(0, words.len());
 
     let filtered_names : Vec<String>= words.into_iter().filter(|e| !e.contains("name" )).filter(|e| !e.contains("adjective")) .map(String::from).collect();
 
-    match filtered_names.get(rand){
-        Some(text) => text.clone(),
-        None => String::from("")
+    if filtered_names.len() <= 0 {
+        return None;
+    }
+
+    match filtered_names.get(create_random(0, filtered_names.len())){
+        Some(text) => Some(text.clone()),
+        None => None
     }
 }
-pub fn read_random_line_in_file(file: &str) -> String {
 
-        match fs::read_to_string(file) {
-            Ok(data) => {
-                let all : Vec<String> = data.lines().map(String::from)
-                    .filter(| e| !e.contains("name") || !e.contains("adjective")).collect();
-
-                let num = create_random(0, all.len());
-
-                println!("{:?}", all[num]);
-
-                all[num].clone()
-            },
-            Err(error) => {
-                println!("Failed becaus of error: {:?}", error);
-                String::from("")    
-            }
-        }
-}
 pub trait RandomNameGenerator<T> {
     fn create_rand_name(&self) -> T;
 
@@ -56,32 +41,33 @@ pub struct RandonAnimalGenerator{
 
 impl RandomNameGenerator<AnimalName> for RandonAnimalGenerator {
     fn create_rand_name(&self) -> AnimalName {
-        let name = self.create_rand_animal_name();
-        let adjective = self.create_rand_adjective();
-        AnimalName{animal: name, adjective}
+        let name = self.create_rand_animal_name().unwrap();
+        let adjective = self.create_rand_adjective().unwrap();
+        
+        return AnimalName{animal: name, adjective}
+        // if let (Some(name), Some(adjective)) = (n, a) {
+        //     return AnimalName{animal: n, adjective: a}
+        // }
+        // return AnimalName { animal: String::from(""), adjective: String::from("") } 
     }
 }
 
 impl RandonAnimalGenerator {
-    fn create_rand_animal_name(&self) -> String {
+    fn create_rand_animal_name(&self) -> Option<String> {
         let animal_names : Vec<&str> = include_str!("../../resources/animals.csv").split("\n").collect();
 
         return_random_element(animal_names)
 
     }
 
-    fn create_rand_adjective(&self) -> String {
+    fn create_rand_adjective(&self) -> Option<String> {
         let words : Vec<&str> = include_str!("../../resources/adjectives.csv").split("\n").collect();
-        println!("ADJ!!!!: {:?}", words);
 
         return_random_element(words)
     }
 }
 
 
-pub struct NameGenerator {
-    // pub generate_random() -> Name
-}
 
 
 
@@ -103,7 +89,55 @@ mod tests {
 
         let element = return_random_element(words);
 
-        assert_eq!(String::from(""), element);
+        assert!(element.is_none());
 
+    }
+
+        // Returns a random element from a non-empty vector of strings
+    #[test]
+    fn test_returns_random_element_from_non_empty_vector() {
+        let words = vec!["apple", "banana", "orange"];
+        let result = return_random_element(words).unwrap();
+        assert!(result == "apple" || result == "banana" || result == "orange");
+    }
+    
+        // Returns an empty string when given an empty vector of strings
+    #[test]
+    fn test_returns_empty_string_with_empty_vector() {
+        let words: Vec<&str> = vec![];
+        let result = return_random_element(words);
+        assert!(result.is_none());
+    }
+    
+        // Filters out elements containing "name" or "adjective" before returning a random element
+    #[test]
+    fn test_filters_out_elements_containing_name_or_adjective() {
+        let words = vec!["apple", "banana", "orange", "name", "adjective"];
+        let result = return_random_element(words).unwrap();
+        assert!(result == "apple" || result == "banana" || result == "orange");
+    }
+    
+        // Returns an empty string when given a vector with only elements containing "name" or "adjective"
+    #[test]
+    fn test_returns_empty_string_with_vector_containing_only_name_or_adjective() {
+        let words = vec!["name", "adjective", "name", "adjective"];
+        let result = return_random_element(words);
+        assert!(result.is_none());
+    }
+    
+        // Returns an empty string when given a vector with only one element containing "name" or "adjective"
+    #[test]
+    fn test_returns_empty_string_with_vector_containing_one_name_or_adjective() {
+        let words = vec!["name"];
+        let result = return_random_element(words);
+        assert!(result.is_none());
+    }
+    
+        // Returns a string when given a vector with only one element not containing "name" or "adjective"
+    #[test]
+    fn test_returns_string_with_vector_containing_one_non_name_or_adjective() {
+        let words = vec!["apple"];
+        let result = return_random_element(words).unwrap();
+        assert_eq!(result, "apple");
     }
 }
