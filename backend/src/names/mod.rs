@@ -1,4 +1,3 @@
-use std::fs;
 use rand::Rng;
 pub fn create_random(min: usize, max: usize) -> usize {
     return rand::thread_rng().gen_range(min..max);
@@ -12,7 +11,10 @@ fn return_random_element(words: Vec<&str>) -> Option<String> {
     }
 
 
-    let filtered_names : Vec<String>= words.into_iter().filter(|e| !e.contains("name" )).filter(|e| !e.contains("adjective")) .map(String::from).collect();
+    let filtered_names : Vec<String> = words.into_iter()
+        .filter(|e| !e.contains("name" ))
+        .filter(|e| !e.contains("adjective")) 
+        .map(String::from).collect();
 
     if filtered_names.len() <= 0 {
         return None;
