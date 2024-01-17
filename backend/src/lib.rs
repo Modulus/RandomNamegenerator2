@@ -1,6 +1,7 @@
-pub mod names;
 
+pub mod names;
 use crate::names::RandonAnimalGenerator;
+
 pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
