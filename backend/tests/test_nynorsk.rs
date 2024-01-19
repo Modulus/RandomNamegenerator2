@@ -1,7 +1,5 @@
 extern crate backend;
 
-use backend::names::animal::RandomAnimalGenerator;
-use backend::names::common::RandomNameGenerator;
 use backend::names::nynorsk::RandomNynorskGenerator;
 
 

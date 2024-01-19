@@ -1,4 +1,4 @@
-use names::{animal::AnimalName, animal::RandomAnimalGenerator, common::RandomNameGenerator};
+use names::{animal::AnimalName, animal::RandomAnimalGenerator, common::{RandomNameGenerator, Person}, nynorsk::RandomNynorskGenerator};
 
 
 pub mod names;
@@ -14,9 +14,14 @@ pub struct Generator{
 
 }
 
+
 impl Generator {
 
     pub fn generate() -> AnimalName {
         return RandomAnimalGenerator::create_rand_name();
     } 
+
+    pub fn generate_nynorsk() -> Person {
+        return RandomNynorskGenerator::create_rand_name();
+    }
 }

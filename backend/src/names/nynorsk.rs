@@ -8,8 +8,13 @@ pub struct RandomNynorskGenerator {
 }
 
 impl RandomNameGenerator<Person> for RandomNynorskGenerator {
+
     fn create_rand_name() -> Person {
-        return Person::new("", "")
+
+        let first = RandomNynorskGenerator::generate_female();
+        let last = RandomNynorskGenerator::generate_last_name();
+
+        return Person::new(&first, &last)
     }
 }
 
@@ -30,7 +35,7 @@ impl RandomNynorskGenerator {
     
     pub fn generate_last_name() -> String {
         let first_parts : Vec<&str> = include_str!("../../resources/nynorsk/last_a.csv").split("\n").collect();
-        let last_parts : Vec<&str> = include_str!("../../resources/nynorsk/last_a.csv").split("\n").collect();
+        let last_parts : Vec<&str> = include_str!("../../resources/nynorsk/last_b.csv").split("\n").collect();
 
         let first = common::return_random_element(first_parts).unwrap();
         let last = common::return_random_element(last_parts).unwrap();

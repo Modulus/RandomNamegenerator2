@@ -1,9 +1,17 @@
 
 use rand::Rng;
 
+#[derive(Debug)]
 pub struct Person {
     pub first_name: String,
     pub sur_name: String
+}
+
+pub enum Type {
+    ANIMAL,
+    NYNORSK,
+    NORSK,
+    NORSE
 }
 
 impl Person {
