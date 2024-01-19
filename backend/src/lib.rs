@@ -1,4 +1,4 @@
-use names::{animal::AnimalName, animal::RandomAnimalGenerator, common::{RandomNameGenerator, Person}, nynorsk::RandomNynorskGenerator};
+use names::{animal::AnimalName, animal::RandomAnimalGenerator, common::{RandomNameGenerator, Person, RandomGenderedNameGenerator, Gender}, nynorsk::RandomNynorskGenerator};
 
 
 pub mod names;
@@ -21,7 +21,7 @@ impl Generator {
         return RandomAnimalGenerator::create_rand_name();
     } 
 
-    pub fn generate_nynorsk() -> Person {
-        return RandomNynorskGenerator::create_rand_name();
+    pub fn generate_nynorsk(gender: Gender) -> Person {
+        return RandomNynorskGenerator::create_rand_name(gender);
     }
 }

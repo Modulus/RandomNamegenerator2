@@ -1,12 +1,22 @@
 
 use rand::Rng;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq )]
 pub struct Person {
     pub first_name: String,
-    pub sur_name: String
+    pub sur_name: String,
+    pub gender: Gender,
 }
 
+#[derive(Debug, PartialEq, Eq)]
+pub enum Gender {
+    MALE,
+    FEMALE,
+    RANDOM,
+    UNKNOWN
+}
+
+#[derive(Debug, PartialEq, Eq)]
 pub enum Type {
     ANIMAL,
     NYNORSK,
@@ -16,13 +26,20 @@ pub enum Type {
 
 impl Person {
     pub fn new(first_name: &str, last_name: &str) -> Self {
-        Self { first_name: String::from(first_name), sur_name: String::from(last_name)}
+        Self { first_name: String::from(first_name), sur_name: String::from(last_name), gender: Gender::UNKNOWN} 
+    }
+
+    pub fn newGendered(first_name: &str, last_name: &str, gender: Gender) -> Self{
+        Self { first_name: String::from(first_name), sur_name: String::from(last_name), gender: gender }
     }
 }
 
 pub trait RandomNameGenerator<T> {
     fn create_rand_name() -> T;
+}
 
+pub trait RandomGenderedNameGenerator<T> {
+    fn create_rand_name(gender: Gender) ->  T;
 }
 
 pub fn create_random(min: usize, max: usize) -> usize {
@@ -123,5 +140,12 @@ mod tests {
         let words = vec!["apple"];
         let result = return_random_element(words).unwrap();
         assert_eq!(result, "apple");
+    }
+
+    #[test]
+    fn test_new_person_without_gendere_has_gender_unknown(){
+        let person = Person::new("jadda", "jauda");
+
+        assert_eq!(person.gender, Gender::UNKNOWN);
     }
 }
