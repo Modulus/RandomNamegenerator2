@@ -10,7 +10,21 @@ pub struct RandomNorskGenerator{
 
 impl RandomGenderedNameGenerator<Person> for RandomNorskGenerator {
     fn generate(gender: Gender) -> Person {
-        return Person::new("", "");
+        match gender {
+            Gender::MALE => {
+                let first = RandomNorskGenerator::generate_male_name();
+                let second = RandomNorskGenerator::generate_last_name();
+                return Person::new_gendered(&first, &second, Gender::MALE);
+            }
+            Gender::FEMALE => {
+                let first = RandomNorskGenerator::generate_female_name();
+                let second = RandomNorskGenerator::generate_last_name();
+                return Person::new_gendered(&first, &second, Gender::FEMALE);
+            },
+            Gender::RANDOM => todo!(),
+            Gender::UNKNOWN => todo!(),
+        }
+
     }
 
 }

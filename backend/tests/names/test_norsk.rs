@@ -63,8 +63,28 @@ fn test_generate_male_name_is_valid(){
 #[test]
 fn test_generate_last_name_is_valid(){
     let name = RandomNorskGenerator::generate_last_name();
-    let all_names : Vec<String> = get_all_last_names().into_iter().collect();
+    let all_names : Vec<String> = get_all_last_names();
 
     assert!(!name.is_empty());
     assert!(all_names.contains(&name));
+}
+
+#[test]
+fn test_generate_female_is_actual_female_name(){
+    let name = RandomNorskGenerator::generate(Gender::FEMALE);
+
+    assert!(!name.first_name.is_empty());
+    assert_eq!(name.gender, Gender::FEMALE);
+    assert!(get_all_female_names().contains(&name.first_name));
+    assert!(get_all_last_names().contains(&name.sur_name));
+}
+
+#[test]
+fn test_generate_male_is_actual_male_name(){
+    let name = RandomNorskGenerator::generate(Gender::MALE);
+
+    assert!(!name.first_name.is_empty());
+    assert_eq!(name.gender, Gender::MALE);
+    assert!(get_all_male_names().contains(&name.first_name));
+    assert!(get_all_last_names().contains(&name.sur_name));
 }
