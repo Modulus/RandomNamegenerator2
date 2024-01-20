@@ -52,7 +52,7 @@ fn test_verify_generated_animal_name_is_included_in_file(){
 
 #[test]
 fn test_verify_generated_adjective_is_included_in_file(){
-    let adjectives = get_all_adjectives();
+    let adjectives : Vec<String> = get_all_adjectives().iter().map(|e| e.replace("\t", "")).collect();
     let generated_animal = RandomAnimalGenerator::generate();
 
     assert!(adjectives.contains(&generated_animal.adjective));

@@ -58,10 +58,11 @@ pub fn get_random_element(words: Vec<&str>) -> Option<String> {
         .filter(|e| !e.contains("name" ))
         .filter(|e| !e.contains("adjective"))
         .filter(|e| !e.contains("part")) 
-        .map(String::from)
         .map(|e| e.replace("\t", ""))
         .map(|e| e.replace("\r", ""))
         .map(|e| e.replace("\n", ""))
+        .map(String::from)
+
         .collect();
 
     if filtered_names.is_empty() {

@@ -60,7 +60,7 @@ fn test_verify_generate_female_name_is_contained_in_full_file(){
 
     assert!(!name.is_empty());
 
-    let all_female_names = get_all_norse_female_names();
+    let all_female_names : Vec<String> = get_all_norse_female_names().iter().map(|e|e.replace("\t", "")).collect();
 
     assert!(all_female_names.contains(&name));
 }
@@ -72,7 +72,7 @@ fn test_verify_generate_female_last_name_is_contained_in_full_file(){
     assert!(!name.is_empty());
 
 
-    let all_names = get_all_norse_female_last_names();
+    let all_names : Vec<String> = get_all_norse_female_last_names().iter().map(|e| e.replace("\t", "")).collect();
 
     assert!(all_names.contains(&name));
 }
@@ -96,7 +96,8 @@ fn test_verify_generate_male_last_name_is_contained_in_full_file(){
     assert!(!name.is_empty());
 
 
-    let all_names = get_all_norse_male_last_names();
+    let all_names : Vec<String> = get_all_norse_male_last_names().iter()
+    .map(|e| e.replace("\t", "")).collect();
 
     assert!(all_names.contains(&name));
 }
@@ -123,6 +124,6 @@ fn test_verify_generate_female_is_valid(){
 
     assert!(!person.first_name.is_empty());
 
-    assert!(get_all_norse_female_names().contains(&person.first_name));
+    assert!(get_all_norse_female_names().iter().map(|e| e.replace("\t", "")).collect::<Vec<String>>().contains(&person.first_name));
     assert!(get_all_norse_female_last_names().contains(&person.sur_name));
 }
