@@ -1,17 +1,17 @@
 extern crate backend;
 
-use std::collections::{HashMap, HashSet};
+use std::collections::HashSet;
 
 use backend::names::animal::RandomAnimalGenerator;
 use backend::names::common::RandomNameGenerator;
 
 fn get_all_animal_names() -> Vec<String>{
-    let animal : Vec<&str> = include_str!("../resources/animals.csv").split("\n").collect(); 
+    let animal : Vec<&str> = include_str!("../../resources/animals.csv").split("\n").collect(); 
     return animal.into_iter().map(String::from).collect();
 }
 
 fn get_all_adjectives() -> Vec<String> {
-    let adjectives : Vec<String> = include_str!("../resources/adjectives.csv").split("\n").map(String::from).collect();
+    let adjectives : Vec<String> = include_str!("../../resources/adjectives.csv").split("\n").map(String::from).collect();
 
     return adjectives;
 }
