@@ -12,7 +12,7 @@ pub struct RandomAnimalGenerator{
 }
 
 impl RandomNameGenerator<AnimalName> for RandomAnimalGenerator {
-    fn create_rand_name() -> AnimalName {
+    fn generate() -> AnimalName {
         let name = RandomAnimalGenerator::create_rand_animal_name().unwrap();
         let adjective = RandomAnimalGenerator::create_rand_adjective().unwrap();
         
@@ -24,14 +24,14 @@ impl RandomAnimalGenerator {
     fn create_rand_animal_name() -> Option<String> {
         let animal_names : Vec<&str> = include_str!("../../resources/animals.csv").split("\n").collect();
 
-        common::return_random_element(animal_names)
+        common::get_random_element(animal_names)
 
     }
 
     fn create_rand_adjective() -> Option<String> {
         let words : Vec<&str> = include_str!("../../resources/adjectives.csv").split("\n").collect();
 
-        common::return_random_element(words)
+        common::get_random_element(words)
     }
 }
 

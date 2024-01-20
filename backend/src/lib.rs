@@ -18,10 +18,10 @@ pub struct Generator{
 impl Generator {
 
     pub fn generate() -> AnimalName {
-        return RandomAnimalGenerator::create_rand_name();
+        return RandomAnimalGenerator::generate();
     } 
 
     pub fn generate_nynorsk(gender: Gender) -> Person {
-        return RandomNynorskGenerator::create_rand_name(gender);
+        return RandomNynorskGenerator::generate(gender);
     }
 }
