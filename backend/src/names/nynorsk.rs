@@ -17,14 +17,14 @@ impl RandomGenderedNameGenerator<Person> for RandomNynorskGenerator {
                 let first = RandomNynorskGenerator::generate_male();
                 let last = RandomNynorskGenerator::generate_last_name();
         
-                return Person::newGendered(&first, &last, Gender::MALE)   
+                return Person::new_gendered(&first, &last, Gender::MALE)   
             },
             Gender::FEMALE => {
 
                 let first = RandomNynorskGenerator::generate_female();
                 let last = RandomNynorskGenerator::generate_last_name();
         
-                return Person::newGendered(&first, &last, Gender::FEMALE)   
+                return Person::new_gendered(&first, &last, Gender::FEMALE)   
             },
             Gender::RANDOM => todo!(),
             Gender::UNKNOWN => todo!(),

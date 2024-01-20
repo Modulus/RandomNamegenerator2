@@ -29,7 +29,7 @@ impl Person {
         Self { first_name: String::from(first_name), sur_name: String::from(last_name), gender: Gender::UNKNOWN} 
     }
 
-    pub fn newGendered(first_name: &str, last_name: &str, gender: Gender) -> Self{
+    pub fn new_gendered(first_name: &str, last_name: &str, gender: Gender) -> Self{
         Self { first_name: String::from(first_name), sur_name: String::from(last_name), gender: gender }
     }
 }
