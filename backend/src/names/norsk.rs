@@ -1,6 +1,5 @@
 use crate::names::common;
 use crate::names::common::RandomGenderedNameGenerator;
-use crate::names::common::RandomNameGenerator;
 use crate::names::common::Gender;
 use common::Person;
 
