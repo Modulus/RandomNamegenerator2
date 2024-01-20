@@ -58,7 +58,11 @@ pub fn get_random_element(words: Vec<&str>) -> Option<String> {
         .filter(|e| !e.contains("name" ))
         .filter(|e| !e.contains("adjective"))
         .filter(|e| !e.contains("part")) 
-        .map(String::from).collect();
+        .map(String::from)
+        .map(|e| e.replace("\t", ""))
+        .map(|e| e.replace("\r", ""))
+        .map(|e| e.replace("\n", ""))
+        .collect();
 
     if filtered_names.is_empty() {
         return None;
@@ -91,6 +95,21 @@ mod tests {
         let element = get_random_element(words);
 
         assert!(element.is_none());
+
+    }
+
+    #[test]
+    fn test_vec_words_contains_invalid_characters_not_such_returned(){
+        let words = vec!["first\t", "second\n", "third\r"];
+
+        let element = get_random_element(words);
+
+        assert!(!element.is_none());
+
+        let word = element.unwrap();
+        assert!(!word.contains("\t"));
+        assert!(!word.contains("\r"));
+        assert!(!word.contains("\n"));
 
     }
 

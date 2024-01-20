@@ -12,5 +12,13 @@ fn main() {
     println!("{:?}", name2);
 
     let name3 = Generator::generate_nynorsk(Gender::MALE);
-    println!("{:?}", name3)
+    println!("{:?}", name3);
+
+    let norse1 = Generator::generate_norse(Gender::MALE);
+    println!("{:?}", norse1);
+
+
+    let norse2 = Generator::generate_norse(Gender::FEMALE);
+    println!("{:?}", norse2);
+
 }
