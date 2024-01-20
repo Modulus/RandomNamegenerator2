@@ -17,10 +17,6 @@ impl RandomNameGenerator<AnimalName> for RandomAnimalGenerator {
         let adjective = RandomAnimalGenerator::create_rand_adjective().unwrap();
         
         return AnimalName{animal: name, adjective}
-        // if let (Some(name), Some(adjective)) = (n, a) {
-        //     return AnimalName{animal: n, adjective: a}
-        // }
-        // return AnimalName { animal: String::from(""), adjective: String::from("") } 
     }
 }
 
