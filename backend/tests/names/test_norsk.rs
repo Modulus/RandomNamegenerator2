@@ -1,6 +1,6 @@
 extern crate backend;
 
-use backend::names::{norse::RandomNorseGenerator, common::{RandomGenderedNameGenerator, Gender}};
+use backend::names::{common::{RandomGenderedNameGenerator, Gender}, norsk::RandomNorskGenerator};
 
 fn get_all_female_names() -> Vec<String>{
     let animal : Vec<&str> = include_str!("../../resources/norwegian_girls.csv").split("\n").collect(); 
@@ -40,4 +40,31 @@ fn test_verify_all_last_names_is_valid(){
 
     assert!(!names.is_empty());
     assert!(names.len() > 3306);
+}
+
+#[test]
+fn test_generate_female_name_is_valid(){
+    let name = RandomNorskGenerator::generate_female_name();
+    let all_names : Vec<String> = get_all_female_names().into_iter().collect();
+
+    assert!(!name.is_empty());
+    assert!(all_names.contains(&name));
+}
+
+#[test]
+fn test_generate_male_name_is_valid(){
+    let name = RandomNorskGenerator::generate_male_name();
+    let all_names : Vec<String> = get_all_male_names().into_iter().collect();
+
+    assert!(!name.is_empty());
+    assert!(all_names.contains(&name));
+}
+
+#[test]
+fn test_generate_last_name_is_valid(){
+    let name = RandomNorskGenerator::generate_last_name();
+    let all_names : Vec<String> = get_all_last_names().into_iter().collect();
+
+    assert!(!name.is_empty());
+    assert!(all_names.contains(&name));
 }

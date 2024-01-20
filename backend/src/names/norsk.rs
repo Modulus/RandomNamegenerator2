@@ -9,27 +9,28 @@ pub struct RandomNorskGenerator{
 }
 
 impl RandomGenderedNameGenerator<Person> for RandomNorskGenerator {
-    fn genrate(gender: Gender) -> Person {
+    fn generate(gender: Gender) -> Person {
         return Person::new("", "");
     }
 
 }
 
+//TODO: FIX
 impl RandomNorskGenerator {
     pub fn generate_female_name() -> String {
-        let names = include_str!("../norwegian_girls.csv")..split("\n").map(String::from).collect();
+        let names = include_str!("../../resources/norwegian_girls.csv").split("\n").collect();
 
-        return common::get_random_element(names);
+        return common::get_random_element(names).unwrap();
     }
 
     pub fn generate_male_name() -> String {
-        let names = include_str!("../norwegian_male.csv")..split("\n").map(String::from).collect();
+        let names = include_str!("../../resources/norwegian_boys.csv").split("\n").collect();
 
-        return common::get_random_element(names);        
+        return common::get_random_element(names).unwrap();        
     }
     pub fn generate_last_name() -> String {
-        let names = include_str!("../norwegian_last.csv")..split("\n").map(String::from).collect();
+        let names = include_str!("../../resources/norwegian_last.csv").split("\n").collect();
 
-        return common::get_random_element(names);   
+        return common::get_random_element(names).unwrap();   
     }
 }
