@@ -40,14 +40,12 @@ fn generate_female() -> Option<Person> {
     let first = RandomNorskGenerator::generate_female_name();
     let second = RandomNorskGenerator::generate_last_name();
     return Some(Person::new_gendered(&first, &second, Gender::FEMALE));
-    None
 }
 
 fn generate_male() -> Option<Person> {
     let first = RandomNorskGenerator::generate_male_name();
     let second = RandomNorskGenerator::generate_last_name();
     return Some(Person::new_gendered(&first, &second, Gender::MALE));
-    None
 }
 
 //TODO: FIX

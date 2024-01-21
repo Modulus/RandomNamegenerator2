@@ -1,6 +1,6 @@
 extern crate backend;
 
-use backend::names::{common::{RandomGenderedNameGenerator, Gender, generate_random_gender}, norsk::RandomNorskGenerator};
+use backend::names::{common::{RandomGenderedNameGenerator, Gender}, norsk::RandomNorskGenerator};
 
 fn get_all_female_names() -> Vec<String>{
     let animal : Vec<&str> = include_str!("../../resources/norwegian_girls.csv").split("\n").collect(); 
