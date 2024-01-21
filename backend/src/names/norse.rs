@@ -12,23 +12,43 @@ impl RandomGenderedNameGenerator<Person> for RandomNorseGenerator {
     fn generate(gender: Gender) -> Person {
         match gender {
             Gender::MALE => {
-                //TODO: FIX THIS
-                let first = RandomNorseGenerator::generate_male().unwrap();
-                let last = RandomNorseGenerator::generate_male_last_name().unwrap();
-                return Person::new_gendered(&first, &last, Gender::MALE);
-
-            },
+                return generate_male().unwrap();
+           },
             Gender::FEMALE => {
-                 //TODO: FIX THIS
-                 let first = RandomNorseGenerator::generate_female().unwrap();
-                 let last = RandomNorseGenerator::generate_female_last_name().unwrap();
-                 return Person::new_gendered(&first, &last, Gender::FEMALE);
-            }
-            Gender::RANDOM => todo!(),
+                return generate_female().unwrap();
+            },
+            Gender::RANDOM => {
+                let gender = common::generate_random_gender();
+                match gender {
+                    Gender::MALE => {
+                        return generate_male().unwrap();
+                   },
+                    Gender::FEMALE => {
+                        return generate_female().unwrap();
+                    },
+                    _ => todo!(),
+                }
+            },
             Gender::UNKNOWN => todo!(),
         }
 
     }
+}
+
+fn generate_female() -> Option<Person> {
+    //TODO: FIX THIS
+
+    let first = RandomNorseGenerator::generate_female().unwrap();
+    let last = RandomNorseGenerator::generate_female_last_name().unwrap();
+    return Some(Person::new_gendered(&first, &last, Gender::FEMALE));
+}
+
+fn generate_male() -> Option<Person> {
+    //TODO: FIX THIS
+
+    let first = RandomNorseGenerator::generate_male().unwrap();
+    let last = RandomNorseGenerator::generate_male_last_name().unwrap();
+    return Some(Person::new_gendered(&first, &last, Gender::MALE));
 }
 
 impl RandomNorseGenerator {

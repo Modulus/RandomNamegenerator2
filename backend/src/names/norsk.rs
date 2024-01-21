@@ -3,6 +3,8 @@ use crate::names::common::RandomGenderedNameGenerator;
 use crate::names::common::Gender;
 use common::Person;
 
+use super::common::generate_random_gender;
+
 pub struct RandomNorskGenerator{
 
 }
@@ -11,21 +13,41 @@ impl RandomGenderedNameGenerator<Person> for RandomNorskGenerator {
     fn generate(gender: Gender) -> Person {
         match gender {
             Gender::MALE => {
-                let first = RandomNorskGenerator::generate_male_name();
-                let second = RandomNorskGenerator::generate_last_name();
-                return Person::new_gendered(&first, &second, Gender::MALE);
+                //TODO: FIX THIS
+                return generate_male().unwrap();
             }
             Gender::FEMALE => {
-                let first = RandomNorskGenerator::generate_female_name();
-                let second = RandomNorskGenerator::generate_last_name();
-                return Person::new_gendered(&first, &second, Gender::FEMALE);
+                //TODO: FIX THIS
+                return generate_female().unwrap();
             },
-            Gender::RANDOM => todo!(),
+            Gender::RANDOM => {
+                //TODO: FIX THIS
+                match generate_random_gender() {
+                    Gender::MALE => generate_male().unwrap(),
+                    Gender::FEMALE => generate_female().unwrap(),
+                    Gender::RANDOM => todo!(),
+                    Gender::UNKNOWN => todo!(),
+                }
+            }
             Gender::UNKNOWN => todo!(),
         }
 
     }
 
+}
+
+fn generate_female() -> Option<Person> {
+    let first = RandomNorskGenerator::generate_female_name();
+    let second = RandomNorskGenerator::generate_last_name();
+    return Some(Person::new_gendered(&first, &second, Gender::FEMALE));
+    None
+}
+
+fn generate_male() -> Option<Person> {
+    let first = RandomNorskGenerator::generate_male_name();
+    let second = RandomNorskGenerator::generate_last_name();
+    return Some(Person::new_gendered(&first, &second, Gender::MALE));
+    None
 }
 
 //TODO: FIX

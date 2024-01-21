@@ -75,6 +75,15 @@ pub fn get_random_element(words: Vec<&str>) -> Option<String> {
     }
 }
 
+pub fn generate_random_gender() -> Gender {
+    let random = get_random(0, 1);
+    match random {
+        0 => Gender::FEMALE,
+        1 => Gender::MALE,
+        _ => Gender::UNKNOWN
+    }
+}
+
 
 #[cfg(test)]
 mod tests {
@@ -168,4 +177,19 @@ mod tests {
 
         assert_eq!(person.gender, Gender::UNKNOWN);
     }
+
+    #[test]
+    fn test_get_random_zero_to_one_returns_zero_or_one(){
+        let random = get_random(0, 1);
+
+        assert!(random == 0 || random == 1);
+    }
+
+    #[test]
+    fn test_generate_random_gender_returns_valid_values(){
+        let gender = generate_random_gender();
+        assert!(gender == Gender::MALE || gender == Gender::FEMALE);
+    }
+
+    
 }

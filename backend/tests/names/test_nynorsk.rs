@@ -141,3 +141,11 @@ fn test_generate_given_male_generates_actual_male_name(){
     assert!(all_first_names.contains(&person.first_name));
     assert!(all_last_names.contains(&person.sur_name));
 }
+
+
+#[test]
+fn test_generate_random_person_is_either_female_or_male(){
+    let person = RandomNynorskGenerator::generate(Gender::RANDOM);
+
+    assert!(person.gender == Gender::FEMALE || person.gender == Gender::MALE);
+}

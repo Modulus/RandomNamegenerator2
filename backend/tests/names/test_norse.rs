@@ -127,3 +127,11 @@ fn test_verify_generate_female_is_valid(){
     assert!(get_all_norse_female_names().iter().map(|e| e.replace("\t", "")).collect::<Vec<String>>().contains(&person.first_name));
     assert!(get_all_norse_female_last_names().contains(&person.sur_name));
 }
+
+#[test]
+fn test_generate_generates_either_female_or_male_person(){
+    let person = RandomNorseGenerator::generate(Gender::RANDOM);
+
+    assert!(!person.first_name.is_empty());
+    assert!(person.gender == Gender::MALE || person.gender == Gender::FEMALE);
+}

@@ -1,14 +1,6 @@
 use names::{animal::AnimalName, animal::RandomAnimalGenerator, common::{RandomNameGenerator, Person, RandomGenderedNameGenerator, Gender}, nynorsk::RandomNynorskGenerator, norse::RandomNorseGenerator, norsk::RandomNorskGenerator};
 
-
 pub mod names;
-
-//TODO: Expand with type of names to create
-// Animal
-// Norse
-// Norwegian bokmål
-// Norwegian Nynorsk
-
 
 pub struct Generator{
 

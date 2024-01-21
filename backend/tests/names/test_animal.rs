@@ -38,6 +38,7 @@ fn test_verify_length_of_adjectives(){
 
     let unique = adjectives.into_iter().collect::<HashSet<String>>();
 
+    //There seems to be a duplicate here
     assert_eq!(unique.len(), 292);
 
 }

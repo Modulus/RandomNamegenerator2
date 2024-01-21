@@ -1,6 +1,6 @@
 extern crate backend;
 
-use backend::names::{common::{RandomGenderedNameGenerator, Gender}, norsk::RandomNorskGenerator};
+use backend::names::{common::{RandomGenderedNameGenerator, Gender, generate_random_gender}, norsk::RandomNorskGenerator};
 
 fn get_all_female_names() -> Vec<String>{
     let animal : Vec<&str> = include_str!("../../resources/norwegian_girls.csv").split("\n").collect(); 
@@ -87,4 +87,11 @@ fn test_generate_male_is_actual_male_name(){
     assert_eq!(name.gender, Gender::MALE);
     assert!(get_all_male_names().contains(&name.first_name));
     assert!(get_all_last_names().contains(&name.sur_name));
+}
+
+#[test]
+fn test_generate_random_gender_returns_male_or_female(){
+    let person = RandomNorskGenerator::generate(Gender::RANDOM);
+
+    assert!(person.gender == Gender::MALE || person.gender == Gender::FEMALE);
 }
