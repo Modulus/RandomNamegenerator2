@@ -2,7 +2,7 @@ extern crate backend;
 
 use std::collections::HashSet;
 
-use backend::names::nynorsk::RandomNynorskGenerator;
+use backend::names::{nynorsk::RandomNynorskGenerator, common::{RandomGenderedNameGenerator, Gender}};
 
 fn get_all_female_names() -> Vec<String>{
     let part1 : Vec<&str> = include_str!("../../resources/nynorsk/first_female_a.csv")
@@ -109,4 +109,35 @@ fn test_generate_last_name_is_not_empty(){
     assert!(name.is_empty() == false);
 
     assert!(get_all_last_names().contains(&name));
+}
+
+#[test]
+fn test_generate_given_female_generates_actual_female_name(){
+    let person = RandomNynorskGenerator::generate(Gender::FEMALE);
+
+    let all_first_names = get_all_female_names();
+    let all_last_names = get_all_last_names();
+
+    assert!(!person.first_name.is_empty());
+    assert!(!person.sur_name.is_empty());
+
+    assert_eq!(Gender::FEMALE, person.gender);
+    assert!(all_first_names.contains(&person.first_name));
+    assert!(all_last_names.contains(&person.sur_name));
+}
+
+
+#[test]
+fn test_generate_given_male_generates_actual_male_name(){
+    let person = RandomNynorskGenerator::generate(Gender::MALE);
+
+    let all_first_names = get_all_male_names();
+    let all_last_names = get_all_last_names();
+
+    assert!(!person.first_name.is_empty());
+    assert!(!person.sur_name.is_empty());
+
+    assert_eq!(Gender::MALE, person.gender);
+    assert!(all_first_names.contains(&person.first_name));
+    assert!(all_last_names.contains(&person.sur_name));
 }
