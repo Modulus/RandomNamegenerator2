@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Build
       run: cargo build --verbose
     - name: Run tests
@@ -24,7 +24,7 @@ jobs:
     needs: build 
     runs-on: ubuntu-latest    
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: login
         uses: docker/login-action@v3
         with: 

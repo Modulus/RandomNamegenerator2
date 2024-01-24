@@ -14,9 +14,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    using: node20
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Build
       run: cargo build --release --verbose
     - name: Run tests
@@ -28,7 +27,7 @@ jobs:
       - name: Set vars
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}         
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: login
         uses: docker/login-action@v3
         with: 
