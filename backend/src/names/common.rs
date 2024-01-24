@@ -1,6 +1,3 @@
-
-use std::env;
-
 use rand::Rng;
 
 #[derive(Debug, PartialEq, Eq )]

@@ -1,6 +1,6 @@
 extern crate backend;
 
-use std::{collections::HashSet, mem::replace};
+use std::collections::HashSet;
 
 use backend::names::{nynorsk::RandomNynorskGenerator, common::{RandomGenderedNameGenerator, Gender}};
 

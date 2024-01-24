@@ -40,14 +40,6 @@ impl RandomAnimalGenerator {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-    use std::env;
-
-
-    #[test]
-    fn test_os_(){
-        println!("{}", env::consts::OS);
-    }
 }
 
 
