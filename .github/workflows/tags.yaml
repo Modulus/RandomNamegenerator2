@@ -1,0 +1,41 @@
+
+name: Relase
+
+on:
+  push:
+    tags:
+      - "[0-9].[0-9].[0-9]"
+  pull_request:
+    tags: 
+      - "[0-9].[0-9].[0-9]"
+env:
+  CARGO_TERM_COLOR: always
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      run: cargo build --release --verbose
+    - name: Run tests
+      run: cargo test --verbose
+  package:
+    needs: build 
+    runs-on: ubuntu-latest    
+    steps:
+      - name: Set vars
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}         
+      - uses: actions/checkout@v3
+      - name: login
+        uses: docker/login-action@v3
+        with: 
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+      - name: Docker build
+        run: docker build -t ghcr.io/modulus/random-name-generator-2:${{ steps.vars.outputs.tag }} -f Dockerfile .
+      - name: Docker push
+        run: docker push ghcr.io/modulus/random-name-generator-2:${{ steps.vars.outputs.tag }}
