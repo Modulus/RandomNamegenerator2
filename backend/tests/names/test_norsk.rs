@@ -3,19 +3,32 @@ extern crate backend;
 use backend::names::{common::{RandomGenderedNameGenerator, Gender}, norsk::RandomNorskGenerator};
 
 fn get_all_female_names() -> Vec<String>{
-    let animal : Vec<&str> = include_str!("../../resources/norwegian_girls.csv").split("\n").collect(); 
-    return animal.into_iter().map(String::from).collect();
+    let animal : Vec<String> = include_str!("../../resources/norwegian_girls.csv").split("\n")
+    .into_iter()
+    .map(| e| e.replace("\r", ""))
+    .map(| e | e.replace("\t", ""))
+    .map(String::from)
+    .collect(); 
+    return animal;
 }
 
 
 fn get_all_male_names() -> Vec<String>{
-    let animal : Vec<&str> = include_str!("../../resources/norwegian_boys.csv").split("\n").collect(); 
-    return animal.into_iter().map(String::from).collect();
+    let animal : Vec<String> = include_str!("../../resources/norwegian_boys.csv").split("\n")
+    .map(| e| e.replace("\r", ""))
+    .map(| e | e.replace("\t", ""))
+    .map(String::from)
+    .collect(); 
+    return animal;
 }
 
 fn get_all_last_names() -> Vec<String>{
-    let animal : Vec<&str> = include_str!("../../resources/norwegian_last.csv").split("\n").collect(); 
-    return animal.into_iter().map(String::from).collect();
+    let animal : Vec<String> = include_str!("../../resources/norwegian_last.csv").split("\n")
+    .map(| e| e.replace("\r", ""))
+    .map(| e | e.replace("\t", ""))
+    .map(String::from)
+    .collect(); 
+    return animal;
 }
 
 #[test]

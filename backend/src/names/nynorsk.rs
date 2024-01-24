@@ -28,10 +28,8 @@ impl RandomGenderedNameGenerator<Person> for RandomNynorskGenerator {
                     Gender::MALE => generate_male(),
                     Gender::FEMALE => generate_female(),
                     Gender::RANDOM => todo!(),
-                    Gender::UNKNOWN => todo!(),
                 }
             }
-            Gender::UNKNOWN => todo!(),
         }
 
     }

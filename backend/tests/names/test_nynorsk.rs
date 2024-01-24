@@ -1,6 +1,6 @@
 extern crate backend;
 
-use std::collections::HashSet;
+use std::{collections::HashSet, mem::replace};
 
 use backend::names::{nynorsk::RandomNynorskGenerator, common::{RandomGenderedNameGenerator, Gender}};
 
@@ -8,7 +8,8 @@ fn get_all_female_names() -> Vec<String>{
     let part1 : Vec<&str> = include_str!("../../resources/nynorsk/first_female_a.csv")
     .split("\n").filter(|e| !e.contains("name")).filter(|e| !e.contains("part")).collect();
     let part2 : Vec<&str> = include_str!("../../resources/nynorsk/first_female_b.csv")
-    .split("\n").filter(|e| !e.contains("name")).filter(|e| !e.contains("part")).collect(); 
+    .split("\n").filter(|e| !e.contains("name")).filter(|e| !e.contains("part"))
+    .collect(); 
 
     return combine_vectors(part1, part2);
 }
@@ -25,7 +26,7 @@ fn combine_vectors(list_a: Vec<&str>, list_b: Vec<&str>) -> Vec<String> {
         }
     }
 
-    return all;
+    return all.into_iter().map(| e | e.replace("\r", "")).map(| e | e.replace("\t", "")).collect();
 }
 
 fn get_all_male_names() -> Vec<String>{

@@ -26,10 +26,8 @@ impl RandomGenderedNameGenerator<Person> for RandomNorskGenerator {
                     Gender::MALE => generate_male().unwrap(),
                     Gender::FEMALE => generate_female().unwrap(),
                     Gender::RANDOM => todo!(),
-                    Gender::UNKNOWN => todo!(),
                 }
             }
-            Gender::UNKNOWN => todo!(),
         }
 
     }

@@ -29,7 +29,6 @@ impl RandomGenderedNameGenerator<Person> for RandomNorseGenerator {
                     _ => todo!(),
                 }
             },
-            Gender::UNKNOWN => todo!(),
         }
 
     }

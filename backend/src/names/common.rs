@@ -1,4 +1,6 @@
 
+use std::env;
+
 use rand::Rng;
 
 #[derive(Debug, PartialEq, Eq )]
@@ -13,7 +15,6 @@ pub enum Gender {
     MALE,
     FEMALE,
     RANDOM,
-    UNKNOWN
 }
 
 #[derive(Debug, PartialEq, Eq)]
@@ -26,7 +27,7 @@ pub enum Type {
 
 impl Person {
     pub fn new(first_name: &str, last_name: &str) -> Self {
-        Self { first_name: String::from(first_name), sur_name: String::from(last_name), gender: Gender::UNKNOWN} 
+        Self { first_name: String::from(first_name), sur_name: String::from(last_name), gender: Gender::RANDOM} 
     }
 
     pub fn new_gendered(first_name: &str, last_name: &str, gender: Gender) -> Self{
@@ -80,16 +81,15 @@ pub fn generate_random_gender() -> Gender {
     match random {
         0 => Gender::FEMALE,
         1 => Gender::MALE,
-        _ => Gender::UNKNOWN
+        _ => Gender::RANDOM
     }
 }
-
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    
+
     #[test]
     fn test_create_rand_is_in_range(){
         let num = get_random(0, 100);
@@ -169,13 +169,6 @@ mod tests {
         let words = vec!["apple"];
         let result = get_random_element(words).unwrap();
         assert_eq!(result, "apple");
-    }
-
-    #[test]
-    fn test_new_person_without_gendere_has_gender_unknown(){
-        let person = Person::new("jadda", "jauda");
-
-        assert_eq!(person.gender, Gender::UNKNOWN);
     }
 
     #[test]

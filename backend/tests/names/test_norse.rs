@@ -3,24 +3,43 @@ extern crate backend;
 use backend::names::{norse::RandomNorseGenerator, common::{RandomGenderedNameGenerator, Gender}};
 
 fn get_all_norse_female_names() -> Vec<String>{
-    let animal : Vec<&str> = include_str!("../../resources/norse_female.csv").split("\n").collect(); 
-    return animal.into_iter().map(String::from).collect();
+    let animal : Vec<String> = include_str!("../../resources/norse_female.csv").split("\n")
+    .into_iter()
+    .map(| e | e.replace("\r", ""))
+    .map(| e |e.replace("\t", ""))
+    .map(String::from)
+    .collect(); 
+    return animal;
 }
 
 fn get_all_norse_male_names() -> Vec<String>{
-    let animal : Vec<&str> = include_str!("../../resources/norse_male.csv").split("\n").collect(); 
-    return animal.into_iter().map(String::from).collect();
+    let animal : Vec<String> = include_str!("../../resources/norse_male.csv").split("\n")
+    .into_iter()
+    .map(| e | e.replace("\r", ""))
+    .map(| e |e.replace("\t", ""))
+    .map(String::from)
+    .collect();
+    return animal
 }
 
 
 fn get_all_norse_female_last_names() -> Vec<String>{
-    let animal : Vec<&str> = include_str!("../../resources/norse_female_last.csv").split("\n").collect(); 
-    return animal.into_iter().map(String::from).collect();
+    let animal : Vec<String> = include_str!("../../resources/norse_female_last.csv").split("\n")
+    .map(| e | e.replace("\r", ""))
+    .map(| e |e.replace("\t", ""))
+    .map(String::from)
+    
+    .collect(); 
+    return animal;
 }
 
 fn get_all_norse_male_last_names() -> Vec<String>{
-    let animal : Vec<&str> = include_str!("../../resources/norse_male_last.csv").split("\n").collect(); 
-    return animal.into_iter().map(String::from).collect();
+    let animal : Vec<String> = include_str!("../../resources/norse_male_last.csv").split("\n")
+    .into_iter()
+    .map(| e | e.replace("\r", ""))
+    .map(| e |e.replace("\t", ""))
+    .map(String::from).collect();
+    return animal;
 }
 
 
@@ -28,6 +47,8 @@ fn get_all_norse_male_last_names() -> Vec<String>{
 #[test]
 fn test_verify_get_all_norse_female_names(){
     let names = get_all_norse_female_names();
+
+    println!("{:?}", names);
 
     assert_eq!(names.len(), 1053);
 }
