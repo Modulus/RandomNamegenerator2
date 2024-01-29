@@ -7,6 +7,8 @@ RUN cargo build --release
 
 FROM gcr.io/distroless/cc-debian12
 
+USER nonroot
+
 WORKDIR /usr/local/bin
 
 COPY --from=build /usr/src/app/target/release .
