@@ -34,19 +34,15 @@ impl RandomGenderedNameGenerator<Person> for RandomNorskGenerator {
 fn generate_female() -> Option<Person> {
     let first = RandomNorskGenerator::generate_female_name();
     let second = RandomNorskGenerator::generate_last_name();
-    match (first, second) {
-        (Some(first), Some(second)) => Some(Person::new_gendered(&first, &second, Gender::FEMALE)),
-        (_,_) => None
-    }
+
+    Some(Person::new_gendered(&first?, &second?, Gender::FEMALE))
 }
 
 fn generate_male() -> Option<Person> {
     let first = RandomNorskGenerator::generate_male_name();
     let second = RandomNorskGenerator::generate_last_name();
-    match (first, second) {
-        (Some(first), Some(second)) => Some(Person::new_gendered(&first, &second, Gender::MALE)),
-        (_,_) => None
-    }
+
+    Some(Person::new_gendered(&first?, &second?, Gender::MALE))
 }
 
 impl RandomNorskGenerator {

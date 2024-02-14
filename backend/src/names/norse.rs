@@ -38,10 +38,8 @@ fn generate_female() -> Option<Person> {
 
     let first = RandomNorseGenerator::generate_female();
     let last = RandomNorseGenerator::generate_female_last_name();
-    match (first, last) {
-        (Some(f), Some(l)) =>  Some(Person::new_gendered(&f, &l, Gender::FEMALE)),
-        (_, _) => None,
-    }
+
+    Some(Person::new_gendered(&first?, &last?, Gender::FEMALE))
 }
 
 fn generate_male() -> Option<Person> {
@@ -49,10 +47,7 @@ fn generate_male() -> Option<Person> {
     let first = RandomNorseGenerator::generate_male();
     let last = RandomNorseGenerator::generate_male_last_name();
 
-    match (first, last) {
-        (Some(f), Some(l)) => Some(Person::new_gendered(&f, &l, Gender::MALE)),
-        (_, _) => None
-    }
+    Some(Person::new_gendered(&first?, &last?, Gender::MALE))
 }
 
 impl RandomNorseGenerator {
