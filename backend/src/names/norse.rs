@@ -55,24 +55,24 @@ impl RandomNorseGenerator {
         let names : Vec<&str> = include_str!("../../resources/norse_female.csv").split("\n").collect();
 
 
-        return common::get_random_element(names);
+        return common::get_random_element(&names);
     }
 
     pub fn generate_male() -> Option<String>{
         let names : Vec<&str> = include_str!("../../resources/norse_male.csv").split("\n").collect();
 
-        return common::get_random_element(names);
+        return common::get_random_element(&names);
     }
 
     pub fn generate_female_last_name() -> Option<String> {
         let names : Vec<&str> = include_str!("../../resources/norse_female_last.csv").split("\n").collect();
 
-        return common::get_random_element(names);
+        return common::get_random_element(&names);
     }
 
     pub fn generate_male_last_name() -> Option<String> {
         let names : Vec<&str> = include_str!("../../resources/norse_male_last.csv").split("\n").collect();
 
-        return common::get_random_element(names);
+        return common::get_random_element(&names);
     }
 }

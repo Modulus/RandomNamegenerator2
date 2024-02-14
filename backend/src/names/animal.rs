@@ -27,14 +27,14 @@ impl RandomAnimalGenerator {
         
         
 
-        common::get_random_element(animal_names)
+        common::get_random_element(&animal_names)
 
     }
 
     fn get_random_adjective() -> Option<String> {
         let words : Vec<&str> = include_str!("../../resources/adjectives.csv").split("\n").collect();
 
-        common::get_random_element(words)
+        common::get_random_element(&words)
     }
 }
 

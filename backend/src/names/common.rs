@@ -49,11 +49,11 @@ pub fn get_random(min: usize, max: usize) -> usize {
     rand::thread_rng().gen_range(min..=max)
 }
 
-pub fn get_random_element(words: Vec<&str>) -> Option<String> {
+pub fn get_random_element(words: &Vec<&str>) -> Option<String> {
     let excluded_words: HashSet<&str> = ["name", "adjective", "part"].iter().cloned().collect();
 
     let filtered_names: Vec<String> = words.into_iter()
-        .filter(|e| !excluded_words.contains(e))
+        .filter(|&e| !excluded_words.contains(e))
         .map(|e| e.replace("\t", "").replace("\r", "").replace("\n", ""))
         .map(String::from)
         .collect();
@@ -90,7 +90,7 @@ mod tests {
     fn test_vec_containing_excluded_words_should_return_empty_string(){
         let words = vec!["name", "adjective", "part"];
 
-        let element = get_random_element(words);
+        let element = get_random_element(&words);
 
         assert!(element.is_none());
 
@@ -100,7 +100,7 @@ mod tests {
     fn test_vec_words_contains_invalid_characters_not_such_returned(){
         let words = vec!["first\t", "second\n", "third\r"];
 
-        let element = get_random_element(words);
+        let element = get_random_element(&words);
 
         assert!(!element.is_none());
 
@@ -115,7 +115,7 @@ mod tests {
     #[test]
     fn test_returns_random_element_from_non_empty_vector() {
         let words = vec!["apple", "banana", "orange"];
-        let result = get_random_element(words).unwrap();
+        let result = get_random_element(&words).unwrap();
         assert!(result == "apple" || result == "banana" || result == "orange");
     }
     
@@ -123,7 +123,7 @@ mod tests {
     #[test]
     fn test_returns_empty_string_with_empty_vector() {
         let words: Vec<&str> = vec![];
-        let result = get_random_element(words);
+        let result = get_random_element(&words);
         assert!(result.is_none());
     }
     
@@ -131,7 +131,7 @@ mod tests {
     #[test]
     fn test_filters_out_elements_containing_name_or_adjective() {
         let words = vec!["apple", "banana", "orange", "name", "adjective"];
-        let result = get_random_element(words).unwrap();
+        let result = get_random_element(&words).unwrap();
         assert!(result == "apple" || result == "banana" || result == "orange");
     }
     
@@ -139,7 +139,7 @@ mod tests {
     #[test]
     fn test_returns_empty_string_with_vector_containing_only_name_or_adjective() {
         let words = vec!["name", "adjective", "name", "adjective"];
-        let result = get_random_element(words);
+        let result = get_random_element(&words);
         assert!(result.is_none());
     }
     
@@ -147,7 +147,7 @@ mod tests {
     #[test]
     fn test_returns_empty_string_with_vector_containing_one_name_or_adjective() {
         let words = vec!["name"];
-        let result = get_random_element(words);
+        let result = get_random_element(&words);
         assert!(result.is_none());
     }
     
@@ -155,7 +155,7 @@ mod tests {
     #[test]
     fn test_returns_string_with_vector_containing_one_non_name_or_adjective() {
         let words = vec!["apple"];
-        let result = get_random_element(words).unwrap();
+        let result = get_random_element(&words).unwrap();
         assert_eq!(result, "apple");
     }
 

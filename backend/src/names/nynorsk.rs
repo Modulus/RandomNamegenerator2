@@ -55,8 +55,8 @@ impl RandomNynorskGenerator {
         let first_male_names_a : Vec<&str> = include_str!("../../resources/nynorsk/first_male_a.csv").split("\n").collect();
         let first_male_names_b : Vec<&str> = include_str!("../../resources/nynorsk/first_male_b.csv").split("\n").collect();
 
-        let first = common::get_random_element(first_male_names_a).unwrap();
-        let last = common::get_random_element(first_male_names_b).unwrap();
+        let first = common::get_random_element(&first_male_names_a).unwrap();
+        let last = common::get_random_element(&first_male_names_b).unwrap();
 
         let compunded = format!("{}{}", first, last);
 
@@ -67,8 +67,8 @@ impl RandomNynorskGenerator {
         let first_female_names_a : Vec<&str> = include_str!("../../resources/nynorsk/first_female_a.csv").split("\n").collect();
         let first_female_names_b : Vec<&str> = include_str!("../../resources/nynorsk/first_female_b.csv").split("\n").collect();
 
-        let first = common::get_random_element(first_female_names_a).unwrap();
-        let last = common::get_random_element(first_female_names_b).unwrap();
+        let first = common::get_random_element(&first_female_names_a).unwrap();
+        let last = common::get_random_element(&first_female_names_b).unwrap();
 
         let compunded = format!("{}{}", first, last);
 
@@ -80,8 +80,8 @@ impl RandomNynorskGenerator {
         let first_parts : Vec<&str> = include_str!("../../resources/nynorsk/last_a.csv").split("\n").collect();
         let last_parts : Vec<&str> = include_str!("../../resources/nynorsk/last_b.csv").split("\n").collect();
 
-        let first = common::get_random_element(first_parts).unwrap();
-        let last = common::get_random_element(last_parts).unwrap();
+        let first = common::get_random_element(&first_parts).unwrap();
+        let last = common::get_random_element(&last_parts).unwrap();
 
         let compunded = format!("{}{}", first, last);
 

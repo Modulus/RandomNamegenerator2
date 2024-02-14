@@ -49,19 +49,19 @@ fn generate_male() -> Option<Person> {
 //TODO: FIX
 impl RandomNorskGenerator {
     pub fn generate_female_name() -> String {
-        let names = include_str!("../../resources/norwegian_girls.csv").split("\n").collect();
+        let names : Vec<&str> = include_str!("../../resources/norwegian_girls.csv").split("\n").collect();
 
-        return common::get_random_element(names).unwrap();
+        return common::get_random_element(&names).unwrap();
     }
 
     pub fn generate_male_name() -> String {
-        let names = include_str!("../../resources/norwegian_boys.csv").split("\n").collect();
+        let names : Vec<&str> = include_str!("../../resources/norwegian_boys.csv").split("\n").collect();
 
-        return common::get_random_element(names).unwrap();        
+        return common::get_random_element(&names).unwrap();        
     }
     pub fn generate_last_name() -> String {
-        let names = include_str!("../../resources/norwegian_last.csv").split("\n").collect();
+        let names : Vec<&str> = include_str!("../../resources/norwegian_last.csv").split("\n").collect();
 
-        return common::get_random_element(names).unwrap();   
+        return common::get_random_element(&names).unwrap();   
     }
 }
