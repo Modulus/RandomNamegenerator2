@@ -80,7 +80,7 @@ fn test_verify_get_all_last_names_is_valid(){
 
 #[test]
 fn test_generate_female_name_is_not_empty(){
-    let name = RandomNynorskGenerator::generate_female();
+    let name = RandomNynorskGenerator::generate_female().unwrap();
 
     println!("Name: {}", name);
 
@@ -92,7 +92,7 @@ fn test_generate_female_name_is_not_empty(){
 
 #[test]
 fn test_generate_male_name_is_not_empty(){
-    let name = RandomNynorskGenerator::generate_male();
+    let name = RandomNynorskGenerator::generate_male().unwrap();
 
     println!("Name: {}", name);
 
@@ -103,7 +103,7 @@ fn test_generate_male_name_is_not_empty(){
 
 #[test]
 fn test_generate_last_name_is_not_empty(){
-    let name = RandomNynorskGenerator::generate_last_name();
+    let name = RandomNynorskGenerator::generate_last_name().unwrap();
 
     println!("Name: {}", name);
 
@@ -114,7 +114,7 @@ fn test_generate_last_name_is_not_empty(){
 
 #[test]
 fn test_generate_given_female_generates_actual_female_name(){
-    let person = RandomNynorskGenerator::generate(Gender::FEMALE);
+    let person = RandomNynorskGenerator::generate(Gender::FEMALE).unwrap();
 
     let all_first_names = get_all_female_names();
     let all_last_names = get_all_last_names();
@@ -130,7 +130,7 @@ fn test_generate_given_female_generates_actual_female_name(){
 
 #[test]
 fn test_generate_given_male_generates_actual_male_name(){
-    let person = RandomNynorskGenerator::generate(Gender::MALE);
+    let person = RandomNynorskGenerator::generate(Gender::MALE).unwrap();
 
     let all_first_names = get_all_male_names();
     let all_last_names = get_all_last_names();
@@ -146,7 +146,7 @@ fn test_generate_given_male_generates_actual_male_name(){
 
 #[test]
 fn test_generate_random_person_is_either_female_or_male(){
-    let person = RandomNynorskGenerator::generate(Gender::RANDOM);
+    let person = RandomNynorskGenerator::generate(Gender::RANDOM).unwrap();
 
     assert!(person.gender == Gender::FEMALE || person.gender == Gender::MALE);
 }

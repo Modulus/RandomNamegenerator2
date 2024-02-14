@@ -11,7 +11,7 @@ pub struct RandomNynorskGenerator {
 
 impl RandomGenderedNameGenerator<Person> for RandomNynorskGenerator {
 
-    fn generate(gender: Gender) -> Person {
+    fn generate(gender: Gender) -> Option<Person> {
 
         match gender {
             Gender::MALE => {
@@ -23,11 +23,10 @@ impl RandomGenderedNameGenerator<Person> for RandomNynorskGenerator {
                 generate_female()   
             },
             Gender::RANDOM => {
-                //TODO: FIX THIS
                 match generate_random_gender(){
                     Gender::MALE => generate_male(),
                     Gender::FEMALE => generate_female(),
-                    Gender::RANDOM => todo!(),
+                    Gender::RANDOM => None,
                 }
             }
         }
@@ -35,57 +34,71 @@ impl RandomGenderedNameGenerator<Person> for RandomNynorskGenerator {
     }
 }
 
-fn generate_female() -> Person {
+fn generate_female() -> Option<Person> {
     let first = RandomNynorskGenerator::generate_female();
     let last = RandomNynorskGenerator::generate_last_name();
+
+    match (first, last) {
+        (Some(first), Some(last)) => Some(Person::new_gendered(&first, &last, Gender::FEMALE)),
+        (_,_) => None
+    }
         
-    return Person::new_gendered(&first, &last, Gender::FEMALE)
 }
 
-fn generate_male() -> Person {
+fn generate_male() -> Option<Person> {
     let first = RandomNynorskGenerator::generate_male();
     let last = RandomNynorskGenerator::generate_last_name();
-        
-    return Person::new_gendered(&first, &last, Gender::MALE)
+
+    match (first, last) {
+        (Some(first), Some(last)) => Some(Person::new_gendered(&first, &last, Gender::MALE)),
+        (_,_) => None
+    }    
+    
 }
 
 impl RandomNynorskGenerator {
-    //TODO: FIX THIS
-    pub fn generate_male() -> String {
+    pub fn generate_male() -> Option<String> {
         let first_male_names_a : Vec<&str> = include_str!("../../resources/nynorsk/first_male_a.csv").split("\n").collect();
         let first_male_names_b : Vec<&str> = include_str!("../../resources/nynorsk/first_male_b.csv").split("\n").collect();
 
-        let first = common::get_random_element(&first_male_names_a).unwrap();
-        let last = common::get_random_element(&first_male_names_b).unwrap();
+        let first = common::get_random_element(&first_male_names_a);
+        let last = common::get_random_element(&first_male_names_b);
 
-        let compunded = format!("{}{}", first, last);
+        match (first, last) {
+            (Some(first), Some(last)) => Some(format!("{}{}", first, last)),
+            (_,_) => None
+        }
 
-        return compunded;
     }
 
-    pub fn generate_female() -> String {
+    pub fn generate_female() -> Option<String> {
         let first_female_names_a : Vec<&str> = include_str!("../../resources/nynorsk/first_female_a.csv").split("\n").collect();
         let first_female_names_b : Vec<&str> = include_str!("../../resources/nynorsk/first_female_b.csv").split("\n").collect();
 
-        let first = common::get_random_element(&first_female_names_a).unwrap();
-        let last = common::get_random_element(&first_female_names_b).unwrap();
+        let first = common::get_random_element(&first_female_names_a);
+        let last = common::get_random_element(&first_female_names_b);
 
-        let compunded = format!("{}{}", first, last);
 
-        return compunded;
+        match (first, last) {
+            (Some(first), Some(last)) => Some(format!("{}{}", &first, &last)),
+            (_,_) => None
+        }
+
 
     }
     
-    pub fn generate_last_name() -> String {
+    pub fn generate_last_name() -> Option<String> {
         let first_parts : Vec<&str> = include_str!("../../resources/nynorsk/last_a.csv").split("\n").collect();
         let last_parts : Vec<&str> = include_str!("../../resources/nynorsk/last_b.csv").split("\n").collect();
 
-        let first = common::get_random_element(&first_parts).unwrap();
-        let last = common::get_random_element(&last_parts).unwrap();
+        let first = common::get_random_element(&first_parts);
+        let last = common::get_random_element(&last_parts);
 
-        let compunded = format!("{}{}", first, last);
+        match (first, last) {
+            (Some(first), Some(last)) => Some(format!("{}{}", first, last)),
+            (_,_) => None
+        }
 
-        return compunded;
     }
 
 }

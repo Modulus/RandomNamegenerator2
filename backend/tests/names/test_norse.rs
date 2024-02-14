@@ -125,7 +125,7 @@ fn test_verify_generate_male_last_name_is_contained_in_full_file(){
 
 #[test]
 fn test_verify_generate_male_is_valid(){
-    let person = RandomNorseGenerator::generate(Gender::MALE);
+    let person = RandomNorseGenerator::generate(Gender::MALE).unwrap();
 
     assert_eq!(person.gender, Gender::MALE);
 
@@ -139,7 +139,7 @@ fn test_verify_generate_male_is_valid(){
 
 #[test]
 fn test_verify_generate_female_is_valid(){
-    let person = RandomNorseGenerator::generate(Gender::FEMALE);
+    let person = RandomNorseGenerator::generate(Gender::FEMALE).unwrap();
 
     assert_eq!(person.gender, Gender::FEMALE);
 
@@ -151,7 +151,7 @@ fn test_verify_generate_female_is_valid(){
 
 #[test]
 fn test_generate_generates_either_female_or_male_person(){
-    let person = RandomNorseGenerator::generate(Gender::RANDOM);
+    let person = RandomNorseGenerator::generate(Gender::RANDOM).unwrap();
 
     assert!(!person.first_name.is_empty());
     assert!(person.gender == Gender::MALE || person.gender == Gender::FEMALE);

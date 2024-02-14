@@ -57,7 +57,7 @@ fn test_verify_all_last_names_is_valid(){
 
 #[test]
 fn test_generate_female_name_is_valid(){
-    let name = RandomNorskGenerator::generate_female_name();
+    let name = RandomNorskGenerator::generate_female_name().unwrap();
     let all_names : Vec<String> = get_all_female_names().into_iter().collect();
 
     assert!(!name.is_empty());
@@ -66,7 +66,7 @@ fn test_generate_female_name_is_valid(){
 
 #[test]
 fn test_generate_male_name_is_valid(){
-    let name = RandomNorskGenerator::generate_male_name();
+    let name = RandomNorskGenerator::generate_male_name().unwrap();
     let all_names : Vec<String> = get_all_male_names().into_iter().collect();
 
     assert!(!name.is_empty());
@@ -75,7 +75,7 @@ fn test_generate_male_name_is_valid(){
 
 #[test]
 fn test_generate_last_name_is_valid(){
-    let name = RandomNorskGenerator::generate_last_name();
+    let name = RandomNorskGenerator::generate_last_name().unwrap();
     let all_names : Vec<String> = get_all_last_names();
 
     assert!(!name.is_empty());
@@ -84,7 +84,7 @@ fn test_generate_last_name_is_valid(){
 
 #[test]
 fn test_generate_female_is_actual_female_name(){
-    let name = RandomNorskGenerator::generate(Gender::FEMALE);
+    let name = RandomNorskGenerator::generate(Gender::FEMALE).unwrap();
 
     assert!(!name.first_name.is_empty());
     assert_eq!(name.gender, Gender::FEMALE);
@@ -94,7 +94,7 @@ fn test_generate_female_is_actual_female_name(){
 
 #[test]
 fn test_generate_male_is_actual_male_name(){
-    let name = RandomNorskGenerator::generate(Gender::MALE);
+    let name = RandomNorskGenerator::generate(Gender::MALE).unwrap();
 
     assert!(!name.first_name.is_empty());
     assert_eq!(name.gender, Gender::MALE);
@@ -104,7 +104,7 @@ fn test_generate_male_is_actual_male_name(){
 
 #[test]
 fn test_generate_random_gender_returns_male_or_female(){
-    let person = RandomNorskGenerator::generate(Gender::RANDOM);
+    let person = RandomNorskGenerator::generate(Gender::RANDOM).unwrap();
 
     assert!(person.gender == Gender::MALE || person.gender == Gender::FEMALE);
 }

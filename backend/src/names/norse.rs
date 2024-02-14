@@ -9,24 +9,24 @@ pub struct RandomNorseGenerator {
 }
 
 impl RandomGenderedNameGenerator<Person> for RandomNorseGenerator {
-    fn generate(gender: Gender) -> Person {
+    fn generate(gender: Gender) -> Option<Person> {
         match gender {
             Gender::MALE => {
-                return generate_male().unwrap();
+                return generate_male();
            },
             Gender::FEMALE => {
-                return generate_female().unwrap();
+                return generate_female();
             },
             Gender::RANDOM => {
                 let gender = common::generate_random_gender();
                 match gender {
                     Gender::MALE => {
-                        return generate_male().unwrap();
+                        return generate_male();
                    },
                     Gender::FEMALE => {
-                        return generate_female().unwrap();
+                        return generate_female();
                     },
-                    _ => todo!(),
+                    _ => None,
                 }
             },
         }
@@ -35,19 +35,24 @@ impl RandomGenderedNameGenerator<Person> for RandomNorseGenerator {
 }
 
 fn generate_female() -> Option<Person> {
-    //TODO: FIX THIS
 
-    let first = RandomNorseGenerator::generate_female().unwrap();
-    let last = RandomNorseGenerator::generate_female_last_name().unwrap();
-    return Some(Person::new_gendered(&first, &last, Gender::FEMALE));
+    let first = RandomNorseGenerator::generate_female();
+    let last = RandomNorseGenerator::generate_female_last_name();
+    match (first, last) {
+        (Some(f), Some(l)) =>  Some(Person::new_gendered(&f, &l, Gender::FEMALE)),
+        (_, _) => None,
+    }
 }
 
 fn generate_male() -> Option<Person> {
-    //TODO: FIX THIS
 
-    let first = RandomNorseGenerator::generate_male().unwrap();
-    let last = RandomNorseGenerator::generate_male_last_name().unwrap();
-    return Some(Person::new_gendered(&first, &last, Gender::MALE));
+    let first = RandomNorseGenerator::generate_male();
+    let last = RandomNorseGenerator::generate_male_last_name();
+
+    match (first, last) {
+        (Some(f), Some(l)) => Some(Person::new_gendered(&f, &l, Gender::MALE)),
+        (_, _) => None
+    }
 }
 
 impl RandomNorseGenerator {

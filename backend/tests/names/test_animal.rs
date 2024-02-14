@@ -52,7 +52,7 @@ fn test_verify_length_of_adjectives(){
 #[test]
 fn test_verify_generated_animal_name_is_included_in_file(){
     let animals = get_all_animal_names();
-    let generated_animal = RandomAnimalGenerator::generate();
+    let generated_animal = RandomAnimalGenerator::generate().unwrap();
     println!("ALL {:?}", &animals);
     println!("Generated {:?}", &generated_animal);
 
@@ -62,7 +62,7 @@ fn test_verify_generated_animal_name_is_included_in_file(){
 #[test]
 fn test_verify_generated_adjective_is_included_in_file(){
     let adjectives : Vec<String> = get_all_adjectives().iter().map(|e| e.replace("\t", "")).collect();
-    let generated_animal = RandomAnimalGenerator::generate();
+    let generated_animal = RandomAnimalGenerator::generate().unwrap();
 
     assert!(adjectives.contains(&generated_animal.adjective));
 }
@@ -70,7 +70,7 @@ fn test_verify_generated_adjective_is_included_in_file(){
 
 #[test]
 fn test_create_random_animal_gives_name(){
-    let compound = RandomAnimalGenerator::generate();
+    let compound = RandomAnimalGenerator::generate().unwrap();
 
     assert!(compound.animal.len() > 1);
     assert!(compound.adjective.len() > 1);

@@ -36,11 +36,11 @@ impl Person {
 }
 
 pub trait RandomNameGenerator<T> {
-    fn generate() -> T;
+    fn generate() -> Option<T>;
 }
 
 pub trait RandomGenderedNameGenerator<T> {
-    fn generate(gender: Gender) ->  T;
+    fn generate(gender: Gender) ->  Option<T>;
 }
 
 

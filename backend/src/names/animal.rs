@@ -13,11 +13,14 @@ pub struct RandomAnimalGenerator{
 }
 
 impl RandomNameGenerator<AnimalName> for RandomAnimalGenerator {
-    fn generate() -> AnimalName {
-        let name = RandomAnimalGenerator::get_random_animal_name().unwrap();
-        let adjective = RandomAnimalGenerator::get_random_adjective().unwrap();
+    fn generate() -> Option<AnimalName> {
+        let animal_name = RandomAnimalGenerator::get_random_animal_name();
+        let adjective = RandomAnimalGenerator::get_random_adjective();
         
-        return AnimalName{animal: name, adjective}
+        match (animal_name, adjective) {
+            (Some(animal), Some(adj)) => Some(AnimalName{animal, adjective: adj}),
+            _ => None,
+        }
     }
 }
 
