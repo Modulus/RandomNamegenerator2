@@ -1,4 +1,6 @@
-use rand::Rng;
+use std::collections::HashSet;
+
+use rand::{seq::SliceRandom, Rng};
 
 #[derive(Debug, PartialEq, Eq )]
 pub struct Person {
@@ -7,6 +9,7 @@ pub struct Person {
     pub gender: Gender,
 }
 
+#[non_exhaustive]
 #[derive(Debug, PartialEq, Eq)]
 pub enum Gender {
     MALE,
@@ -40,45 +43,33 @@ pub trait RandomGenderedNameGenerator<T> {
     fn generate(gender: Gender) ->  T;
 }
 
-pub fn get_random(min: usize, max: usize) -> usize {
-    return rand::thread_rng().gen_range(min..max);
 
+
+pub fn get_random(min: usize, max: usize) -> usize {
+    rand::thread_rng().gen_range(min..=max)
 }
 
-
 pub fn get_random_element(words: Vec<&str>) -> Option<String> {
-    if words.is_empty() {
-        return None;
-    }
+    let excluded_words: HashSet<&str> = ["name", "adjective", "part"].iter().cloned().collect();
 
-
-    let filtered_names : Vec<String> = words.into_iter()
-        .filter(|e| !e.contains("name" ))
-        .filter(|e| !e.contains("adjective"))
-        .filter(|e| !e.contains("part")) 
-        .map(|e| e.replace("\t", ""))
-        .map(|e| e.replace("\r", ""))
-        .map(|e| e.replace("\n", ""))
+    let filtered_names: Vec<String> = words.into_iter()
+        .filter(|e| !excluded_words.contains(e))
+        .map(|e| e.replace("\t", "").replace("\r", "").replace("\n", ""))
         .map(String::from)
-
         .collect();
 
     if filtered_names.is_empty() {
         return None;
     }
 
-    match filtered_names.get(get_random(0, filtered_names.len())){
-        Some(text) => Some(text.clone()),
-        None => None
-    }
+    filtered_names.choose(&mut rand::thread_rng()).cloned()
 }
 
 pub fn generate_random_gender() -> Gender {
-    let random = get_random(0, 1);
-    match random {
-        0 => Gender::FEMALE,
-        1 => Gender::MALE,
-        _ => Gender::RANDOM
+    if rand::random() {
+        Gender::MALE
+    } else {
+        Gender::FEMALE
     }
 }
 
